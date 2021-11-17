@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const studentSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: String,
   email: String,
   library: [mongoose.Schema.Types.ObjectId],
