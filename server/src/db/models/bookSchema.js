@@ -2,11 +2,19 @@ import mongoose from "mongoose";
 
 const bookSchema = mongoose.Schema({
   name: String,
-  quantity: Number,
-  library: [mongoose.Schema.Types.ObjectId],
-  borrowedBy: [
+  author: String,
+  year: String,
+  library: [
     {
-      student: mongoose.Schema.Types.ObjectId,
+      library: mongoose.Schema.Types.ObjectId,
+      quantity: Number,
+    },
+  ], // it is a array as book can be in multiple libraries
+  borrowedBy: [
+    // current
+    {
+      student: mongoose.Schema.Types.ObjectId, // who borrowed it
+      library: mongoose.Schema.Types.ObjectId, // from what library
       borrowedOn: Date,
       expectedReturn: Date,
     },

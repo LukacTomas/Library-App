@@ -43,6 +43,16 @@ export const getOneStudentFromDb = ({ _id }) => getOneItemById(Student, _id);
  */
 export const getAllStudents = () => getLits(Student);
 
+
+
 // TODO problably need to push somewhere, depending on schema
+/**
+ * 
+ * Model.update(
+    { _id: Model._id }, 
+    { $push: { Array: element } },
+    done
+  );
+ */
 export const updateStudentInDb = (updateStudentObj) =>
   updateOneItem(Student, updateStudentObj);

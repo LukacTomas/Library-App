@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const studentSchema = mongoose.Schema({
   name: String,
   email: String,
-  library: [mongoose.Schema.Types.ObjectId],
+  mobile: String,
+  library: [mongoose.Schema.Types.ObjectId], // student can be part of multiple libraries
   history: [
     {
       borrowedOn: Date,
