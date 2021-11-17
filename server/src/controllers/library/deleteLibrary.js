@@ -9,6 +9,7 @@ export const deleteLibrary = async (httpRequest) => {
     let response = "Unknow Error";
     if (areParamsValid(httpRequest)) {
       response = await deleteLibraryFromDb(httpRequest.body);
+      checkForDeleteCount(response);
     }
     return {
       headers,
@@ -53,4 +54,13 @@ function areParamsValid({ body }) {
   }
 
   return true;
+}
+
+function checkForDeleteCount(response) {
+  console.log(response.deletedCount);
+  if (response.deletedCount === 0) {
+    const error = new Error("Nothing deleted");
+    error.message = "Nothing was deleted, bad id?";
+    throw error;
+  }
 }

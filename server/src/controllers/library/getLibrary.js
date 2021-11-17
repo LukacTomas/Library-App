@@ -10,12 +10,7 @@ export const getLibrary = async (httpRequest) => {
 
     if (areParamsValid(httpRequest)) {
       response = await getOneLibraryFromDb(httpRequest.params);
-      if (response === null) {
-        response = {
-          message: `Library with id: ${httpRequest.params._id} not found`,
-        };
-      }
-    
+      checkForNullResponse(response);
     }
     return {
       headers,
@@ -59,4 +54,12 @@ function areParamsValid({ params }) {
   }
 
   return true;
+}
+
+function checkForNullResponse(response) {
+  if (response === null) {
+    const error = new Error("Bad id");
+    error.message = "Library with given _id not found";
+    throw error;
+  }
 }
