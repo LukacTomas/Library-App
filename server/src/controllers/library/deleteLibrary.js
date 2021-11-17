@@ -57,7 +57,6 @@ function areParamsValid({ body }) {
 }
 
 function checkForDeleteCount(response) {
-  console.log(response.deletedCount);
   if (response.deletedCount === 0) {
     const error = new Error("Nothing deleted");
     error.message = "Nothing was deleted, bad id?";
