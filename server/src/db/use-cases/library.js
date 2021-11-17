@@ -1,32 +1,46 @@
 import Library from "../models/librarySchema.js";
+import {
+  addOneItem,
+  deleteOneItemById,
+  getLits,
+  getOneItemById,
+  updateOneItem,
+} from "./index.js";
 
-export const addLibraryToDb = async (addLibraryObj) => {
-  const library = await Library.create(addLibraryObj);
-  return library;
-};
+/**
+ * Insert one library to db
+ * @param {addLibraryObj} addLibraryObj
+ * - object of values to save in db
+ * - must include _id
+ * @returns
+ */
+export const addLibraryToDb = (addLibraryObj) =>
+  addOneItem(Library, addLibraryObj);
 
-export const deleteLibraryFromDb = async (deleteLibraryObj) => {
-  const { _id } = deleteLibraryObj;
-  const deleted = await Library.deleteOne({ _id });
-  return deleted;
-};
+/**
+ * Delete One Library From DB By _id
+ * @param {deleteLibraryFromDb} deleteLibraryFromDb
+ * - object of values
+ * - must include _id
+ * @returns
+ */
+export const deleteLibraryFromDb = ({ _id }) => deleteOneItemById(Library, _id);
 
-export const getOneLibraryFromDb = async (getLibraryObj) => {
-  const library = await Library.findById(getLibraryObj._id);
-  return library;
-};
+/**
+ * Get One Library From DB By _id
+ * @param {getOneLibraryFromDb} getOneLibraryFromDb
+ * - object of values
+ * - must include _id
+ * @returns
+ */
+export const getOneLibraryFromDb = ({ _id }) => getOneItemById(Library, _id);
 
-export const getAllLibraries = async () => {
-  const libraries = await Library.find({}).sort({ _id: -1 });
-  return libraries;
-};
-
-export const updateLibraryInDb = async (updateLibraryObj) => {
-  const { _id, name, address } = updateLibraryObj;
-  const updateObj = {
-    name,
-    address,
-  };
-  const updated = await Library.updateOne({ _id }, updateObj);
-  return updated;
-};
+/**
+ * List All Available Libraries
+ * @param {}
+ *
+ * @returns
+ */
+export const getAllLibraries = () => getLits(Library);
+export const updateLibraryInDb = (updateLibraryObj) =>
+  updateOneItem(Library, updateLibraryObj);
