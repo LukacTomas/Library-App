@@ -1,2 +1,3 @@
 import libraryRoutes from "./library.js";
-export { libraryRoutes };
+import bookRoutes from "./book.js";
+export { libraryRoutes, bookRoutes };
