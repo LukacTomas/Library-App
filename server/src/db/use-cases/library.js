@@ -1,7 +1,7 @@
 import Library from "../models/librarySchema.js";
 
 export const getAllLibraries = async () => {
-  const libraries = await Library.find({}, "name").sort({ _id: -1 });
+  const libraries = await Library.find({}).sort({ _id: -1 });
   return libraries;
 };
 
@@ -13,5 +13,15 @@ export const addLibraryToDb = async (addLibraryObj) => {
     update,
     options
   );
+  return library;
+};
+
+export const updateLibraryInDb = async (updateLibraryObj) => {
+  const { _id, name, address } = updateLibraryObj;
+  const updateObj = {
+    name,
+    address,
+  };
+  const library = await Library.updateOne({ _id }, updateObj);
   return library;
 };

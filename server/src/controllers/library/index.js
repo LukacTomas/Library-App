@@ -1,3 +1,5 @@
-import { getLibraries } from "./getLibraries.js";
 import { addLibrary } from "./addLibrary.js";
-export { getLibraries, addLibrary };
+import { getLibraries } from "./getLibraries.js";
+import { updateLibrary } from "./updateLibrary.js";
+
+export { addLibrary, getLibraries, updateLibrary };
