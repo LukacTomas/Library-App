@@ -6,7 +6,7 @@ import {
   deleteLibrary,
   getLibrary,
 } from "../controllers/library/index.js";
-import { makeCallback } from "../express-callback/callback.js";
+import { makeCallback } from "../express-callback/makeCallback.js";
 const router = express.Router();
 
 router.get("/", makeCallback(getLibraries));

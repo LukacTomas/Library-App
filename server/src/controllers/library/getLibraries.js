@@ -23,3 +23,8 @@ export const getLibraries = async (httpRequest) => {
     };
   }
 };
+
+export const getLibrariesNew = async () => {
+  const libs = await getAllLibraries();
+  return libs;
+};
