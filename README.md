@@ -1,4 +1,4 @@
-# LIBRARY APP
+# LIBRARY APP - server
 
 ## Funkcie :
 
@@ -40,3 +40,13 @@ Nižšie nájede opis, čo bude aplikácia zvládať
 - POST "/" - add new Book, required params: **_name_**, **_quantity_**
 - PUT "/" - update Book, required params: **_\_id_**, **_name_**, **_quantity_**
 - DELETE "/" - delete Book, required param: **_\_id_**
+
+## ENPOINTS FOR STUDENT - "/Student" +
+
+- GET "/" - returns all students
+- GET "/:\_id" - returns Student with specified id
+- POST "/" - add new Student, required params: **_name_**, **_email_**
+- PUT "/" - update Student, required params: **_\_id_**, **_name_**, **_email_**
+- DELETE "/" - delete Student, required param: **_\_id_**
+
+# LIBRARY APP - client
