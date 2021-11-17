@@ -1,13 +1,7 @@
 import Library from "../models/librarySchema.js";
 
 export const addLibraryToDb = async (addLibraryObj) => {
-  const update = { expire: new Date() };
-  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
-  const library = await Library.findOneAndUpdate(
-    addLibraryObj,
-    update,
-    options
-  );
+  const library = await Library.create(addLibraryObj);
   return library;
 };
 
