@@ -25,10 +25,18 @@ Nižšie nájede opis, čo bude aplikácia zvládať
 - Vylúčenie knihy z knižnice
 - Editovanie knihy
 
-## ENPOINTS FOR LIBRARY
+## ENPOINTS FOR LIBRARY - "/library" +
 
-- GET "/" - returns all libraries
-- GET "/:\_id" - returns library with specified id
+- GET "/" - returns all Libraries
+- GET "/:\_id" - returns Library with specified id
 - POST "/" - add new Library, required params: **_name_**, **_address_**
-- PUT "/" - update library, required params: **_\_id_**,**_name_**, **_address_**
-- DELETE "/" - delete library, required param: **_\_id_**
+- PUT "/" - update Library, required params: **_\_id_**, **_name_**, **_address_**
+- DELETE "/" - delete Library, required param: **_\_id_**
+
+## ENPOINTS FOR BOOK - "/book" +
+
+- GET "/" - returns all books
+- GET "/:\_id" - returns Book with specified id
+- POST "/" - add new Book, required params: **_name_**, **_quantity_**
+- PUT "/" - update Book, required params: **_\_id_**, **_name_**, **_quantity_**
+- DELETE "/" - delete Book, required param: **_\_id_**
