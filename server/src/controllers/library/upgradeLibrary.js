@@ -1,29 +1,9 @@
 import { updateLibraryInDb } from "../../db/use-cases/library.js";
 
-export const updateLibrary = async (httpRequest) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-  try {
-    //
-    let response = "Unknow Error";
-
-    if (areParamsValid(httpRequest)) {
-      response = await updateLibraryInDb(httpRequest.body);
-    }
-    return {
-      headers,
-      statusCode: response === "Unknow Error" ? 404 : 200,
-      body: response,
-    };
-  } catch (error) {
-    return {
-      headers,
-      statusCode: 400,
-      body: {
-        error: error.message,
-      },
-    };
+export const upgradeLibrary = async (httpRequest) => {
+  if (areParamsValid(httpRequest)) {
+    const response = await updateLibraryInDb(httpRequest.body);
+    return response;
   }
 };
 

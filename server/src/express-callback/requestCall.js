@@ -21,3 +21,8 @@ export const createCallback = async (controller) => async (httpRequest) => {
     };
   }
 };
+
+export const requestCall = (libraryRequest) => async (httpRequest) => {
+  const callback = await createCallback(libraryRequest);
+  return await callback(httpRequest);
+};

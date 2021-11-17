@@ -1,30 +1,10 @@
 import { getOneLibraryFromDb } from "../../db/use-cases/library.js";
 
-export const getLibrary = async (httpRequest) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-  try {
-    //
-    let response = "Unknow Error";
-
-    if (areParamsValid(httpRequest)) {
-      response = await getOneLibraryFromDb(httpRequest.params);
-      checkForNullResponse(response);
-    }
-    return {
-      headers,
-      statusCode: response === "Unknow Error" ? 404 : 200,
-      body: response,
-    };
-  } catch (error) {
-    return {
-      headers,
-      statusCode: 400,
-      body: {
-        error: error.message,
-      },
-    };
+export const viewLibrary = async (httpRequest) => {
+  if (areParamsValid(httpRequest)) {
+    const response = await getOneLibraryFromDb(httpRequest.params);
+    checkForNullResponse(response);
+    return response;
   }
 };
 

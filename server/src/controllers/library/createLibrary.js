@@ -1,28 +1,9 @@
 import { addLibraryToDb } from "../../db/use-cases/library.js";
 
-export const addLibrary = async (httpRequest) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-  try {
-    //
-    let response = "Unknow Error";
-    if (areParamsValid(httpRequest)) {
-      response = await addLibraryToDb(httpRequest.body);
-    }
-    return {
-      headers,
-      statusCode: response === "Unknow Error" ? 404 : 200,
-      body: response,
-    };
-  } catch (error) {
-    return {
-      headers,
-      statusCode: 400,
-      body: {
-        error: error.message,
-      },
-    };
+export const createLibrary = async (httpRequest) => {
+  if (areParamsValid(httpRequest)) {
+    const response = await addLibraryToDb(httpRequest.body);
+    return response;
   }
 };
 

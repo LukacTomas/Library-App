@@ -1,14 +1,15 @@
-import { addLibrary } from "./addLibrary.js";
-import { deleteLibrary } from "./deleteLibrary.js";
-import { getLibrary } from "./getLibrary.js";
-import { getLibraries as getAll } from "./getLibraries.js";
-import { updateLibrary } from "./updateLibrary.js";
-import { getLibrariesNew } from "./getLibraries.js";
-import { createCallback } from "../../express-callback/createCallback.js";
+import { createLibrary } from "./createLibrary.js";
+import { flushLibrary } from "./flushLibrary.js";
+import { listLibraries } from "./listLibraries.js";
+import { upgradeLibrary } from "./upgradeLibrary.js";
+import { viewLibrary } from "./viewLibrary.js";
 
-const getLibraries = async (httpRequest) => {
-  const callback = await createCallback(getLibrariesNew);
-  return await callback();
-};
+import { requestCall } from "../../express-callback/requestCall.js";
+
+const addLibrary = requestCall(createLibrary);
+const deleteLibrary = requestCall(flushLibrary);
+const getLibrary = requestCall(viewLibrary);
+const getLibraries = requestCall(listLibraries);
+const updateLibrary = requestCall(upgradeLibrary);
 
 export { addLibrary, deleteLibrary, getLibrary, getLibraries, updateLibrary };
