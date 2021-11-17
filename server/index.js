@@ -4,7 +4,11 @@
 import express from "express";
 import cors from "cors";
 import { getDatabase } from "./src/db/index.js";
-import { libraryRoutes, bookRoutes } from "./src/routes/index.js";
+import {
+  bookRoutes,
+  libraryRoutes,
+  studentRoutes,
+} from "./src/routes/index.js";
 
 // App initialization
 const app = express();
@@ -20,8 +24,9 @@ app.use(cors());
  */
 const PORT = process.env.PORT || 5000;
 const initApplication = () => {
-  app.use("/library", libraryRoutes);
   app.use("/book", bookRoutes);
+  app.use("/library", libraryRoutes);
+  app.use("/student", studentRoutes);
   app.listen(PORT, () => console.log(`Listening for port ${PORT}`));
 };
 

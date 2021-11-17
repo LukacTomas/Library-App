@@ -41,5 +41,7 @@ export const getOneBookFromDb = ({ _id }) => getOneItemById(Book, _id);
  * @returns
  */
 export const getAllBooks = () => getLits(Book);
+
+// TODO probably need to push something, depending on schema
 export const updateBookInDb = (updateBookObj) =>
   updateOneItem(Book, updateBookObj);
