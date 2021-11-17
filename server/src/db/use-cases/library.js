@@ -22,6 +22,12 @@ export const updateLibraryInDb = async (updateLibraryObj) => {
     name,
     address,
   };
-  const library = await Library.updateOne({ _id }, updateObj);
-  return library;
+  const updated = await Library.updateOne({ _id }, updateObj);
+  return updated;
+};
+
+export const deleteLibraryFromDb = async (deleteLibraryObj) => {
+  const { _id } = deleteLibraryObj;
+  const deleted = await Library.deleteOne({ _id });
+  return deleted;
 };

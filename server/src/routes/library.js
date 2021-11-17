@@ -3,6 +3,7 @@ import {
   addLibrary,
   getLibraries,
   updateLibrary,
+  deleteLibrary,
 } from "../controllers/library/index.js";
 import { makeCallback } from "../express-callback/callback.js";
 const router = express.Router();
@@ -10,4 +11,5 @@ const router = express.Router();
 router.get("/", makeCallback(getLibraries));
 router.post("/", makeCallback(addLibrary));
 router.put("/", makeCallback(updateLibrary));
+router.delete("/", makeCallback(deleteLibrary));
 export default router;
