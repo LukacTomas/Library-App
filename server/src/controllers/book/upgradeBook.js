@@ -1,8 +1,8 @@
-import { addBookToDb } from "../../db/use-cases/book.js";
+import { updateBookInDb } from "../../db/use-cases/Book.js";
 
-export const createBook = async (httpRequest) => {
+export const upgradeBook = async (httpRequest) => {
   if (areParamsValid(httpRequest)) {
-    const response = await addBookToDb(httpRequest.body);
+    const response = await updateBookInDb(httpRequest.body);
     return response;
   }
 };
@@ -16,10 +16,15 @@ export const createBook = async (httpRequest) => {
  *  Note: Function creates error messages
  *
  */
-
+// TODO validation should be updated
 function areParamsValid({ body }) {
   const errorMassages = [];
-
+  if (body._id === undefined) {
+    errorMassages.push({ _id: "Missing _id" });
+  }
+  if (body._id && !body._id.match(/^[0-9a-fA-F]{24}$/)) {
+    errorMassages.push({ _id: "Not Valid _id" });
+  }
   if (body.name === undefined) {
     errorMassages.push({ name: "Book name not provided" });
   }
