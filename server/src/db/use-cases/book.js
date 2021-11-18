@@ -1,3 +1,6 @@
+/**
+ * Bussiness logic for books
+ */
 import Book from "../models/bookSchema.js";
 import {
   addOneItem,
@@ -23,6 +26,8 @@ export const addBookToDb = (addBookObj) => addOneItem(Book, addBookObj);
  * - must include _id
  * @returns
  */
+// TODO should think about deleting just connection between book and library
+// book can still be active in DB
 export const deleteBookFromDb = ({ _id }) => deleteOneItemById(Book, _id);
 
 /**

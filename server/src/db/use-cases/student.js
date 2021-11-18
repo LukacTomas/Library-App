@@ -1,3 +1,6 @@
+/**
+ * Bussiness logic for Student
+ */
 import Student from "../models/StudentSchema.js";
 import {
   addOneItem,
@@ -24,6 +27,7 @@ export const addStudentToDb = (addStudentObj) =>
  * - must include _id
  * @returns
  */
+// TODO check if student has books borrowed
 export const deleteStudentFromDb = ({ _id }) => deleteOneItemById(Student, _id);
 
 /**
@@ -43,9 +47,7 @@ export const getOneStudentFromDb = ({ _id }) => getOneItemById(Student, _id);
  */
 export const getAllStudents = () => getLits(Student);
 
-
-
-// TODO problably need to push somewhere, depending on schema
+// TODO problably need to push somthing somewhere, depending on schema
 /**
  * 
  * Model.update(

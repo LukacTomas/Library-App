@@ -1,3 +1,6 @@
+/**
+ * Bussiness logic for Library
+ */
 import Library from "../models/librarySchema.js";
 import {
   addOneItem,
@@ -24,6 +27,7 @@ export const addLibraryToDb = (addLibraryObj) =>
  * - must include _id
  * @returns
  */
+// TODO remove also all relationships to student and books
 export const deleteLibraryFromDb = ({ _id }) => deleteOneItemById(Library, _id);
 
 /**
@@ -42,5 +46,6 @@ export const getOneLibraryFromDb = ({ _id }) => getOneItemById(Library, _id);
  * @returns
  */
 export const getAllLibraries = () => getLits(Library);
+
 export const updateLibraryInDb = (updateLibraryObj) =>
   updateOneItem(Library, updateLibraryObj);
