@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
 
 const librarySchema = mongoose.Schema({
-  name: String,
-  address: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   mobile: String,
 });
 

@@ -26,3 +26,9 @@ export const updateOneItem = async (Model, obj) => {
   const updated = await Model.updateOne({ _id }, obj);
   return updated;
 };
+
+export const validateObj = async (Model, obj) => {
+  const model = new Model(obj);
+  const validation = await model.validate();
+  return validation;
+};

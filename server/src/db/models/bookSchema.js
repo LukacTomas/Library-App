@@ -1,13 +1,22 @@
 import mongoose from "mongoose";
 
 const bookSchema = mongoose.Schema({
-  name: String,
-  author: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
   year: String,
   library: [
     {
       library: mongoose.Schema.Types.ObjectId,
-      quantity: Number,
+      quantity: {
+        type: Number,
+        min: [0, "Must be at least 0, got {VALUE}"],
+      },
     },
   ], // it is a array as book can be in multiple libraries
   borrowedBy: [
