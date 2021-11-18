@@ -24,11 +24,21 @@ export const addStudentToDb = (addStudentObj) =>
  * Delete One Student From DB By _id
  * @param {deleteStudentFromDb} deleteStudentFromDb
  * - object of values
- * - must include _id
+ * - must include _id - student id
+ * - must incluide library_id - where to remove student from
  * @returns
  */
 // TODO check if student has books borrowed
-export const deleteStudentFromDb = ({ _id }) => deleteOneItemById(Student, _id);
+export const deleteStudentFromDb = ({ _id }) => {
+  // 1. getStudentFromDB
+  // 2. if he has books
+  //       throw error  - return book first
+  // 3. if he is in multiple libraries (id of library should be provided as param)
+  //       pull him from libraries
+  // 4. if he is in one library, delete student completely
+
+  return deleteOneItemById(Student, _id);
+};
 
 /**
  * Get One Student From DB By _id
@@ -47,14 +57,39 @@ export const getOneStudentFromDb = ({ _id }) => getOneItemById(Student, _id);
  */
 export const getAllStudents = () => getLits(Student);
 
-// TODO problably need to push somthing somewhere, depending on schema
-/**
- * 
- * Model.update(
-    { _id: Model._id }, 
-    { $push: { Array: element } },
-    done
-  );
- */
-export const updateStudentInDb = (updateStudentObj) =>
-  updateOneItem(Student, updateStudentObj);
+export const updateStudentInDb = (updateStudentObj) => {
+  const updateObj = createUpdateStudentObj(updateStudentObj);
+  return updateOneItem(Student, updateObj);
+};
+
+// TODO upratať, pre nedostatok času pozastavene
+function createUpdateStudentObj(updateStudentObj) {
+  const updateObj = { $push: {} };
+  if (updateStudentObj._id) {
+    updateObj["_id"] = updateStudentObj._id;
+  }
+  if (updateStudentObj.name) {
+    updateObj["name"] = updateStudentObj.name;
+  }
+  if (updateStudentObj.email) {
+    updateObj["email"] = updateStudentObj.email;
+  }
+  if (updateStudentObj.mobile) {
+    updateObj["mobile"] = updateStudentObj.mobile;
+  }
+  if (updateStudentObj.library) {
+    updateObj["$push"]["library"] = updateStudentObj["library"];
+  }
+  if (updateStudentObj.history) {
+    const history = {
+      borrowedOn: updateStudentObj.history.borrowedOn,
+      returnedOn: updateStudentObj.history.returnedOn,
+      book: updateStudentObj.history.book,
+      library: updateStudentObj.history.library,
+    };
+
+    updateObj["$push"]["history"] = history;
+  }
+
+  return updateObj;
+}

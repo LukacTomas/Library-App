@@ -20,11 +20,20 @@ export const flushStudent = async (httpRequest) => {
 
 function areParamsValid({ body }) {
   const errorMassages = [];
-
+  // student id
   if (body._id === undefined) {
-    errorMassages.push({ _id: "Missing _id" });
+    errorMassages.push({ _id: "Student _id is missing" });
   }
   if (body._id && !body._id.match(/^[0-9a-fA-F]{24}$/)) {
+    errorMassages.push({ _id: "Not Valid _id" });
+  }
+
+  if (body.library_id === undefined) {
+    errorMassages.push({
+      _id: "Library _id is missing - where I remove student from?",
+    });
+  }
+  if (body.library_id && !body._id.match(/^[0-9a-fA-F]{24}$/)) {
     errorMassages.push({ _id: "Not Valid _id" });
   }
 

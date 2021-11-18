@@ -1,7 +1,5 @@
 import { updateStudentInDb } from "../../db/use-cases/Student.js";
 
-// TODO should be updated to push into arrays
-// update with overwrite array - need to process httpRequest.body
 export const upgradeStudent = async (httpRequest) => {
   if (areParamsValid(httpRequest)) {
     const response = await updateStudentInDb(httpRequest.body);
@@ -19,6 +17,7 @@ export const upgradeStudent = async (httpRequest) => {
  *
  */
 // TODO validation should be updated for optional params
+// Maybe I can leave for db for now
 function areParamsValid({ body }) {
   const errorMassages = [];
 
