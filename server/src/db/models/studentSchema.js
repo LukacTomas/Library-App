@@ -13,6 +13,7 @@ const studentSchema = mongoose.Schema({
   library: [mongoose.Schema.Types.ObjectId], // student can be part of multiple libraries
   history: [
     {
+      _id: false,
       borrowedOn: Date,
       returnedOn: Date,
       book: mongoose.Schema.Types.ObjectId,

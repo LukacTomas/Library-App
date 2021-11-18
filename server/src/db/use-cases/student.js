@@ -29,14 +29,23 @@ export const addStudentToDb = (addStudentObj) =>
  * @returns
  */
 // TODO check if student has books borrowed
-export const deleteStudentFromDb = ({ _id }) => {
+export const deleteStudentFromDb = async ({ _id, library_id }) => {
   // 1. getStudentFromDB
-  // 2. if he has books
-  //       throw error  - return book first
+  const student = await getOneItemById(Student, _id);
+  // 2. if he has books in current library
+  const notReturnedBooks = await checkForReturnedBooks(student, library_id);
+  if (notReturnedBooks.length > 0) {
+    return notReturnedBooks;
+  }
   // 3. if he is in multiple libraries (id of library should be provided as param)
   //       pull him from libraries
-  // 4. if he is in one library, delete student completely
+  if (student.library.length > 1) {
+    const pullObj = createPullStudentFromLibrary(_id, library_id);
+    const pulled = await updateOneItem(Student, pullObj);
+    return pulled;
+  }
 
+  // 4. if he is in one library, delete student completely
   return deleteOneItemById(Student, _id);
 };
 
@@ -64,7 +73,7 @@ export const updateStudentInDb = (updateStudentObj) => {
 
 // TODO upratať, pre nedostatok času pozastavene
 function createUpdateStudentObj(updateStudentObj) {
-  const updateObj = { $push: {} };
+  const updateObj = { $addToSet: {} };
   if (updateStudentObj._id) {
     updateObj["_id"] = updateStudentObj._id;
   }
@@ -78,7 +87,7 @@ function createUpdateStudentObj(updateStudentObj) {
     updateObj["mobile"] = updateStudentObj.mobile;
   }
   if (updateStudentObj.library) {
-    updateObj["$push"]["library"] = updateStudentObj["library"];
+    updateObj["$addToSet"]["library"] = updateStudentObj["library"];
   }
   if (updateStudentObj.history) {
     const history = {
@@ -86,10 +95,28 @@ function createUpdateStudentObj(updateStudentObj) {
       returnedOn: updateStudentObj.history.returnedOn,
       book: updateStudentObj.history.book,
       library: updateStudentObj.history.library,
+      _id: updateStudentObj.history._id,
     };
 
-    updateObj["$push"]["history"] = history;
+    updateObj["$addToSet"]["history"] = history;
   }
 
   return updateObj;
+}
+
+async function checkForReturnedBooks(studentObj, fromLibrary) {
+  const student = await studentObj;
+  const { history } = student;
+  const allNotReturnedBooks = history.filter(({ returnedOn }) => !returnedOn);
+  const notReturnedBooks = allNotReturnedBooks.filter(
+    ({ library }) => String(library) === fromLibrary
+  );
+  return notReturnedBooks;
+}
+
+function createPullStudentFromLibrary(_id, library) {
+  const pullObj = { $pull: {} };
+  pullObj["_id"] = _id;
+  pullObj["$pull"]["library"] = library;
+  return pullObj;
 }

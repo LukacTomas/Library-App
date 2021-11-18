@@ -22,6 +22,7 @@ const bookSchema = mongoose.Schema({
   borrowedBy: [
     // current
     {
+      _id: false,
       student: mongoose.Schema.Types.ObjectId, // who borrowed it
       library: mongoose.Schema.Types.ObjectId, // from what library
       borrowedOn: Date,
