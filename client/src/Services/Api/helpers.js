@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// eslint-disable-next-line
 import { BASE_URI, GET_INIT, POST_INIT, DELETE_INIT, PUT_INIT } from "./config";
 
 // used for initiating all fetch calls
