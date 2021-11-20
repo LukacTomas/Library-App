@@ -1,9 +1,13 @@
 import React from "react";
 import { Theme } from "./Theme";
-//import { useFetchList, STUDENT, LIBRARY, BOOK } from "./Services/Api";
+import { LibraryPage } from "./Pages";
 
 function App() {
-  return <Theme></Theme>;
+  return (
+    <Theme>
+      <LibraryPage />
+    </Theme>
+  );
 }
 
 export default App;
