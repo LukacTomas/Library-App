@@ -1,5 +1,5 @@
-import { useFetchList } from "./helpers";
+import { useFetchList, useFetchItem, useFetchAddItem } from "./helpers";
 import { BOOK, LIBRARY, STUDENT } from "./config";
 
-export { useFetchList };
+export { useFetchList, useFetchItem, useFetchAddItem };
 export { BOOK, LIBRARY, STUDENT };
