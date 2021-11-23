@@ -96,6 +96,27 @@ export const useFetchAddItem = (path, data) => {
   return useFetchApi(BASE_URI + path, init);
 };
 
+/**
+ * Hook that fetches one item from db
+ * from given path
+ *
+ * @param {*} path, _id
+ *
+ *  - which path to fetch
+ *  - _id of an item
+ *
+ * @returns
+ *  Object - data, state\
+ *  data - fetch data\
+ *  states - IDLE, LOADING, LOADED, ERROR
+ *
+ */
+// TODO handle deletion
+export const useFetchDeleteItem = (path, _id, callback) => {
+  const init = { ...DELETE_INIT, body: JSON.stringify({ _id: _id }) };
+  return useFetchApi(BASE_URI + path, init);
+};
+
 /*
 function createFormData(data = {}) {
   const formData = new FormData();

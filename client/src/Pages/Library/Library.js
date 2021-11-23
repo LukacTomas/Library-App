@@ -1,6 +1,8 @@
 import React from "react";
 import { AddNewButton, AddNewActions } from "./Addnew";
 import { Libraries } from "./LibrariesTable";
+
+//import { useFetchDeleteItem } from "../../Services/Api/";
 /**
  * Library page component
  * - displaying all libraries
@@ -25,7 +27,6 @@ export const Library = ({ data }) => {
   // TODO delete from mongo
   const deleteLib = (_id) => {
     if (!_id) return;
-    console.log("deleting", _id);
   };
   return (
     <>
