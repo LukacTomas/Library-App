@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // eslint-disable-next-line
 import { BASE_URI, GET_INIT, POST_INIT, DELETE_INIT, PUT_INIT } from "./config";
 
@@ -112,9 +112,17 @@ export const useFetchAddItem = (path, data) => {
  *
  */
 // TODO handle deletion
-export const useFetchDeleteItem = (path, _id, callback) => {
-  const init = { ...DELETE_INIT, body: JSON.stringify({ _id: _id }) };
-  return useFetchApi(BASE_URI + path, init);
+export const useFetchDeleteItem = (path, _id) => {
+  const fetchApi = useFetchApi;
+  const deleteItemFromDb = useCallback(
+    (path, _id) => {
+      const init = { ...DELETE_INIT, body: JSON.stringify({ _id: _id }) };
+      console.log(init);
+      return fetchApi(BASE_URI + path, init);
+    },
+    [fetchApi]
+  );
+  return deleteItemFromDb;
 };
 
 /*
