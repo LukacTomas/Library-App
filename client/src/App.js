@@ -1,6 +1,6 @@
 import React from "react";
 import { Theme } from "./Theme";
-import { LibraryPage } from "./Pages";
+import { LibraryPage, ShowLibrary } from "./Pages";
 
 function App() {
   return (
