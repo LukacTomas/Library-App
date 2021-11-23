@@ -16,6 +16,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const initialState = { name: "", address: "", mobile: "" };
 
+
+/**
+ * 
+ * TODO rewrite it to use Formik or react-forms 
+ */
+
 export const AddNewActions = ({ open, handleClose, addLib }) => {
   const [fields, setFields] = useState(initialState);
   const [disabled, setDisabled] = useState(true);

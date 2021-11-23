@@ -3,16 +3,19 @@ import { useEffect, useState } from "react";
 import { BASE_URI, GET_INIT, POST_INIT, DELETE_INIT, PUT_INIT } from "./config";
 
 // used for initiating all fetch calls
+const NUM_OF_REPEATS = 3;
 const useFetchApi = (url, init = GET_INIT) => {
   const [data, setData] = useState(null);
   const [state, setState] = useState("IDLE");
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (count > 3) {
+    if (count > NUM_OF_REPEATS) {
       setState("ERROR");
       return;
     }
+    if (count < NUM_OF_REPEATS && state !== "IDLE") return;
+
     async function fetchAsync() {
       setState("LOADING");
       const response = await fetch(url, init);
@@ -20,7 +23,7 @@ const useFetchApi = (url, init = GET_INIT) => {
       setCount((count) => count + 1);
       return data;
     }
-    console.log(count);
+
     fetchAsync()
       .then((data) => {
         setData(data);
@@ -31,7 +34,7 @@ const useFetchApi = (url, init = GET_INIT) => {
         setData(error);
         setCount((count) => count + 1);
       });
-  }, [init, url, count]);
+  }, [init, url, count, state]);
 
   return { data, state };
 };
@@ -88,11 +91,12 @@ export const useFetchItem = (path, _id) => {
  *
  */
 export const useFetchAddItem = (path, data) => {
-  const formData = createFormData(data);
+  //const formData = createFormData(data);
   const init = { ...POST_INIT, body: JSON.stringify(data) };
   return useFetchApi(BASE_URI + path, init);
 };
 
+/*
 function createFormData(data = {}) {
   const formData = new FormData();
   for (const [key, value] of Object.entries(data)) {
@@ -100,3 +104,4 @@ function createFormData(data = {}) {
   }
   return formData;
 }
+*/
